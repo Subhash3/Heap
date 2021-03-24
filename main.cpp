@@ -14,53 +14,39 @@ int main()
 
     while (true)
     {
-        printf("1. Get children of.\n");
-        printf("2. Get Parent of.\n");
-        printf("3. Insert an element.\n");
-        printf("4. Display\n");
-        printf("5. Delete max/min.\n");
-        printf("6. Peak\n");
-        printf("7. Heap sort\n");
-        printf("8. Exit\n");
+        printf("1. Insert an element.\n");
+        printf("2. Display\n");
+        printf("3. Delete max/min.\n");
+        printf("4. Peak\n");
+        printf("5. Heap sort\n");
+        printf("6. Exit\n");
         printf("[Heap size: (%d)]> Select one: ", heap->size);
         scanf("%d", &choice);
 
         switch (choice)
         {
         case 1:
-            printf("Enter parent index: ");
-            scanf("%d", &index);
-            children = heap->getChildrenIndices(index);
-            printf("leftIndex: %d, right index: %d\n", children.first, children.second);
-            break;
-        case 2:
-            printf("Enter child index: ");
-            scanf("%d", &index);
-            parentIndex = heap->getParentIndex(index);
-            printf("parentIndex: %d\n", parentIndex);
-            break;
-        case 3:
             printf("Enter an element: ");
             scanf("%d", &num);
             heap->insert(num, 1);
             break;
-        case 4:
+        case 2:
             heap->display();
             break;
-        case 5:
+        case 3:
             heap->remove();
             break;
-        case 6:
+        case 4:
             heapElement = heap->peak();
             printf("Max/min element: %d, data: %d\n", heapElement.val, heapElement.data);
             break;
-        case 7:
+        case 5:
             sorted = heap->heapSort();
             printVector(sorted);
             sorted = heap->heapSort(true);
             printVector(sorted);
             break;
-        case 8:
+        case 6:
             exit(0);
         default:
             printf("Invalid choice\n");

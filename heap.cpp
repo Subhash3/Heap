@@ -57,39 +57,42 @@ public:
     }
 
 private:
-    bool comparator(int a, int b, bool strict = true)
-    {
-        if (this->type == MAX_HEAP_TYPE)
-        {
-            if (strict)
-            {
-                return a > b;
-            }
-            return a >= b;
-        }
-        if (strict)
-        {
-            return a < b;
-        }
-        return a <= b;
-    }
-
-public:
+    bool comparator(int a, int b, bool strict = true);
     pair<int, int> getChildrenIndices(int parentIndex);
     int getParentIndex(int childIndex);
+    int getPrioritizedChildIndex(int parentIndex);
+    void swap(HeapElement<T> *a, HeapElement<T> *b);
+
+public:
+    void heapifyUp(int index);
+    void heapifyDown(int elementIndex);
+    void heapify();
     void display();
     bool insert(int element, T data);
     bool insert(int element);
-    void swap(HeapElement<T> *a, HeapElement<T> *b);
-    void heapifyUp(int index);
     bool remove();
-    void heapifyDown(int elementIndex);
-    int getPrioritizedChildIndex(int parentIndex);
     HeapElement<T> peak();
-    void heapify();
     bool isEmpty();
     vector<int> heapSort(bool ascending = false);
 };
+
+template <class T>
+bool Heap<T>::comparator(int a, int b, bool strict = true)
+{
+    if (this->type == MAX_HEAP_TYPE)
+    {
+        if (strict)
+        {
+            return a > b;
+        }
+        return a >= b;
+    }
+    if (strict)
+    {
+        return a < b;
+    }
+    return a <= b;
+}
 
 template <class T>
 bool Heap<T>::isEmpty()
