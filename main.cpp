@@ -9,6 +9,7 @@ int main()
     vector<int> sorted;
     // Heap *heap = new Heap(1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
     Heap<int> *heap = new Heap<int>();
+    HeapElement<int> heapElement;
 
     while (true)
     {
@@ -40,7 +41,7 @@ int main()
         case 3:
             printf("Enter an element: ");
             scanf("%d", &num);
-            heap->insert(num);
+            heap->insert(num, 1);
             break;
         case 4:
             heap->display();
@@ -49,8 +50,8 @@ int main()
             heap->remove();
             break;
         case 6:
-            num = heap->peak();
-            printf("Max/min element: %d\n", num);
+            heapElement = heap->peak();
+            printf("Max/min element: %d, data: %d\n", heapElement.val, heapElement.data);
             break;
         case 7:
             sorted = heap->heapSort();
