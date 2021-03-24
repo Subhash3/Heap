@@ -77,7 +77,7 @@ public:
 };
 
 template <class T>
-bool Heap<T>::comparator(int a, int b, bool strict = true)
+bool Heap<T>::comparator(int a, int b, bool strict)
 {
     if (this->type == MAX_HEAP_TYPE)
     {
