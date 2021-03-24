@@ -39,11 +39,47 @@ public:
         this->heapify();
     }
 
+    // Indices will be used as data if integer array is passed
+    Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {})
+    {
+        int i;
+
+        this->type = type;
+        this->size = arr.size();
+
+        for (i = 0; i < this->size; i++)
+        {
+            HeapElement<T> he = {arr[i], i};
+            this->items.push_back(he);
+        }
+
+        this->heapify();
+    }
+
+private:
+    bool comparator(int a, int b, bool strict = true)
+    {
+        if (this->type == MAX_HEAP_TYPE)
+        {
+            if (strict)
+            {
+                return a > b;
+            }
+            return a >= b;
+        }
+        if (strict)
+        {
+            return a < b;
+        }
+        return a <= b;
+    }
+
 public:
     pair<int, int> getChildrenIndices(int parentIndex);
     int getParentIndex(int childIndex);
     void display();
     bool insert(int element, T data);
+    bool insert(int element);
     void swap(HeapElement<T> *a, HeapElement<T> *b);
     void heapifyUp(int index);
     bool remove();
@@ -85,6 +121,7 @@ template <class T>
 int Heap<T>::getPrioritizedChildIndex(int parentIndex)
 {
     pair<int, int> children;
+    int a, b;
 
     children = this->getChildrenIndices(parentIndex);
     if (children.first == -1 && children.second != -1)
@@ -103,7 +140,10 @@ int Heap<T>::getPrioritizedChildIndex(int parentIndex)
         return -1;
     }
 
-    return (this->items[children.first].val >= this->items[children.second].val) ? children.first : children.second;
+    // return (this->items[children.first].val >= this->items[children.second].val) ? children.first : children.second;
+    a = this->items[children.first].val;
+    b = this->items[children.second].val;
+    return this->comparator(a, b, false) ? children.first : children.second;
 }
 
 template <class T>
@@ -135,7 +175,7 @@ void Heap<T>::heapifyUp(int elementIndex)
     {
         parentIndex = this->getParentIndex(elementIndex);
         // printf("parent: %d, element: %d\n", parentIndex, elementIndex);
-        if ((elementIndex <= 0) || (this->items[parentIndex].val >= element))
+        if ((elementIndex <= 0) || this->comparator(this->items[parentIndex].val, element, false))
         {
             // printf("Reached root or parent > child\n");
             break;
@@ -159,7 +199,7 @@ void Heap<T>::heapifyDown(int elementIndex)
         {
             break;
         }
-        if (this->items[maxChildIndex].val <= this->items[elementIndex].val)
+        if (!this->comparator(this->items[maxChildIndex].val, this->items[elementIndex].val))
         {
             break;
         }
@@ -203,6 +243,13 @@ bool Heap<T>::insert(int element, T data)
     this->heapifyUp(elementIndex);
 
     return true;
+}
+
+template <class T>
+bool Heap<T>::insert(int element)
+{
+    // If no data is provided, index is used!
+    return this->insert(element, this->size);
 }
 
 template <class T>

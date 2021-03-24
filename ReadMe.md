@@ -20,6 +20,10 @@
     */
 
 
+    // Indices will be used as data if integer array is passed
+    Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {});
+
+    // Methods
     pair<int, int> getChildrenIndices(int parentIndex);
     int getParentIndex(int childIndex);
     void display();
@@ -38,6 +42,6 @@
 #### To Do:
 - [x] Max Heap
 - [x] Add template instead of just integer.
-- [ ] Add comparator function to distinguish b/w max and min heaps
+- [x] Add comparator function to distinguish b/w max and min heaps
 
 ##### Feel free to contribute and open any issues.
