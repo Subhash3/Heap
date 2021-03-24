@@ -7,8 +7,8 @@ int main()
     int choice, index, parentIndex, num;
     pair<int, int> children;
     vector<int> sorted;
-    Heap *heap = new Heap(1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-    // Heap *heap = new Heap();
+    // Heap *heap = new Heap(1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+    Heap<int> *heap = new Heap<int>();
 
     while (true)
     {

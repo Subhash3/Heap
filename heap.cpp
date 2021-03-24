@@ -10,14 +10,24 @@ using namespace std;
 #define RIGHT_CHILD -1
 #define EQUAL 0
 
+template <typename X>
+struct HeapElement
+{
+    int val;
+    X other;
+};
+
+template <class T>
 class Heap
 {
-public:
+private:
     vector<int> items;
-    int size;
-    int type;
 
-    Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {})
+public:
+    int type;
+    int size;
+
+    Heap(int type = MAX_HEAP_TYPE, vector<HeapElement<T>> arr = {})
     {
         this->type = type;
         this->items = arr;
@@ -42,12 +52,14 @@ public:
     vector<int> heapSort(bool ascending = false);
 };
 
-bool Heap::isEmpty()
+template <class T>
+bool Heap<T>::isEmpty()
 {
     return this->size <= 0;
 }
 
-pair<int, int> Heap::getChildrenIndices(int parentIndex)
+template <class T>
+pair<int, int> Heap<T>::getChildrenIndices(int parentIndex)
 {
     int left, right;
 
@@ -60,12 +72,14 @@ pair<int, int> Heap::getChildrenIndices(int parentIndex)
     return {left, right};
 }
 
-int Heap::getParentIndex(int childIndex)
+template <class T>
+int Heap<T>::getParentIndex(int childIndex)
 {
     return ceil((double)childIndex / (double)2) - 1;
 }
 
-int Heap::getMaxChildIndex(int parentIndex)
+template <class T>
+int Heap<T>::getMaxChildIndex(int parentIndex)
 {
     pair<int, int> children;
 
@@ -89,7 +103,8 @@ int Heap::getMaxChildIndex(int parentIndex)
     return (this->items[children.first] >= this->items[children.second]) ? children.first : children.second;
 }
 
-void Heap::display()
+template <class T>
+void Heap<T>::display()
 {
     int i;
     bool enteredLoop = false;
@@ -107,7 +122,8 @@ void Heap::display()
     return;
 }
 
-void Heap::heapifyUp(int elementIndex)
+template <class T>
+void Heap<T>::heapifyUp(int elementIndex)
 {
     int parentIndex, element;
 
@@ -128,7 +144,8 @@ void Heap::heapifyUp(int elementIndex)
     return;
 }
 
-void Heap::heapifyDown(int elementIndex)
+template <class T>
+void Heap<T>::heapifyDown(int elementIndex)
 {
     int maxChildIndex;
 
@@ -150,7 +167,8 @@ void Heap::heapifyDown(int elementIndex)
     return;
 }
 
-void Heap::heapify()
+template <class T>
+void Heap<T>::heapify()
 {
     int i, lastInternalNodeIndex;
 
@@ -166,7 +184,8 @@ void Heap::heapify()
     return;
 }
 
-bool Heap::insert(int element)
+template <class T>
+bool Heap<T>::insert(int element)
 {
     int elementIndex;
 
@@ -179,7 +198,8 @@ bool Heap::insert(int element)
     return true;
 }
 
-bool Heap::remove()
+template <class T>
+bool Heap<T>::remove()
 {
     if (this->isEmpty())
     {
@@ -194,7 +214,8 @@ bool Heap::remove()
     return true;
 }
 
-vector<int> Heap::heapSort(bool ascending)
+template <class T>
+vector<int> Heap<T>::heapSort(bool ascending)
 {
     vector<int> sorted, heapCopy;
     int maxElement, sizeCopy;
@@ -224,12 +245,18 @@ vector<int> Heap::heapSort(bool ascending)
     return sorted;
 }
 
-int Heap::peak()
+template <class T>
+int Heap<T>::peak()
 {
+    if (this->isEmpty())
+    {
+        return -1;
+    }
     return this->items[0];
 }
 
-void Heap::swap(int *a, int *b)
+template <class T>
+void Heap<T>::swap(int *a, int *b)
 {
     int temp;
 
