@@ -5,7 +5,7 @@
 using namespace std;
 
 #define MAX_HEAP_TYPE 1
-#define MIN_HEAP_TYPE 0
+#define MIN_HEAP_TYPE -1
 #define LEFT_CHILD 1
 #define RIGHT_CHILD -1
 #define EQUAL 0
@@ -30,8 +30,11 @@ public:
     Heap(int type = MAX_HEAP_TYPE, vector<HeapElement<T>> arr = {})
     {
         this->type = type;
-        this->items = arr;
         this->size = arr.size();
+        for (HeapElement<T> he : arr)
+        {
+            this->items.push_back(he);
+        }
 
         this->heapify();
     }
