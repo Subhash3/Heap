@@ -2,41 +2,59 @@
 
 ### API
 ```c++
+    
     template <typename X>
     struct HeapElement
     {
-        int val;
+        double val;
         X data;
     };
     /*
-        val is the prioritized element. Sorting takes place based on val.
-        data is optional data that users want to store.
+        val  =>  the prioritized element. Sorting takes place based on val.
+        data =>  optional data that user wants to store at the same place as val.
     */
 
+
+    /************ Constructors *************/
     Heap(int type = -1, vector<HeapElement<T>> arr = {});
     /*
         Default heapType is max-heap, use type = -1 for min-heap.
         If arr is passed, then heap will be built based on the values of arr.
     */
 
-
     // Indices will be used as data if integer array is passed
     Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {});
 
-    // Methods
-    pair<int, int> getChildrenIndices(int parentIndex);
-    int getParentIndex(int childIndex);
-    void display();
-    bool insert(int element, T data);
-    void swap(HeapElement<T> *a, HeapElement<T> *b);
-    void heapifyUp(int index);
-    bool remove();
-    void heapifyDown(int elementIndex);
-    int getPrioritizedChildIndex(int parentIndex);
-    HeapElement<T> peak();
+
+    /*********** Methods *************/
+    // Converts an array into heap
     void heapify();
+
+    // Prints the heap, (Only val not data)
+    void display();
+
+    // Inserts a new element to the heap along with data
+    bool insert(double element, T data);
+
+    // Overloaded method of the above method. If no data is passed, its index will be used a data
+    bool insert(double element);
+
+    // Removes the top/prioritized element of the heap
+    bool remove();
+
+    // Returns the top/prioritized element of the heap. This doesn't affect the heap.
+    HeapElement<T> peak();
+
+    // Returns true if the heap is empty and false otherwise.
     bool isEmpty();
-    vector<int> heapSort(bool ascending = false);
+
+    // Returns the sorted arr of the heapElements.val. This doesn't affect the heap.
+    vector<double> heapSort(bool reverse = false);
+
+    // Utility functions.
+    void heapifyUp(int index);
+    void heapifyDown(int elementIndex);
+
 ```
 
 #### To Do:
@@ -44,6 +62,7 @@
 - [x] Add template instead of just integer.
 - [x] Add comparator function to distinguish b/w max and min heaps.
 - [x] Male val as double instead of int.
+- [ ] In display method, accept a printerFunction to print the HeapElement<T>.
 - [ ] Make val to accept int, float and double.
 
 ##### Feel free to contribute and open any issues.

@@ -27,6 +27,7 @@ public:
     int type;
     int size;
 
+    // Vector of heap elements
     Heap(int type = MAX_HEAP_TYPE, vector<HeapElement<T>> arr = {})
     {
         this->type = type;
@@ -73,7 +74,7 @@ public:
     bool remove();
     HeapElement<T> peak();
     bool isEmpty();
-    vector<int> heapSort(bool reverse = false);
+    vector<double> heapSort(bool reverse = false);
 };
 
 template <class T>
@@ -172,7 +173,7 @@ template <class T>
 void Heap<T>::heapifyUp(int elementIndex)
 {
     int parentIndex;
-	double element;
+    double element;
 
     element = this->items[elementIndex].val;
     while (true)
@@ -273,10 +274,10 @@ bool Heap<T>::remove()
 }
 
 template <class T>
-vector<int> Heap<T>::heapSort(bool reverse)
+vector<double> Heap<T>::heapSort(bool reverse)
 {
     vector<HeapElement<T>> heapCopy;
-    vector<int> sorted;
+    vector<double> sorted;
     HeapElement<T> maxElement;
     int sizeCopy;
 
