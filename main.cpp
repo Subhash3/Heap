@@ -6,7 +6,7 @@ int main()
 {
     int choice, num;
     pair<int, int> children;
-    vector<int> sorted;
+    vector<double> sorted;
     // Heap<int> *heap = new Heap<int>(-1, {{1, 0}, {2, 1}, {3, 2}, {5, 4}, {6, 5}, {7, 6}, {8, 7}, {9, 8}, {10, 9}});
     Heap<int> *heap = new Heap<int>(-1, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
     // Heap<int> *heap = new Heap<int>();
@@ -56,7 +56,7 @@ int main()
     }
 }
 
-void printVector(vector<int> arr)
+void printVector(vector<double> arr)
 {
     int i, size;
     bool enteredLoop = false;
@@ -67,7 +67,7 @@ void printVector(vector<int> arr)
     for (i = 0; i < size; i++)
     {
         enteredLoop = true;
-        printf("%d  ", arr[i]);
+        printf("%f  ", arr[i]);
         fflush(NULL);
     }
     printf(enteredLoop ? "\b\b]\n" : "]\n");
