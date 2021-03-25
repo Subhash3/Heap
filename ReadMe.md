@@ -2,7 +2,11 @@
 
 ### API
 ```c++
-    
+    // Types
+    #define MAX_HEAP_TYPE 1
+    #define MIN_HEAP_TYPE -1
+
+    // Heap Element    
     template <typename X>
     struct HeapElement
     {
@@ -16,14 +20,14 @@
 
 
     /************ Constructors *************/
-    Heap(int type = -1, vector<HeapElement<T>> arr = {});
+    Heap(int type = MAX_HEAP_TYPE, vector<HeapElement<T>> arr = {});
     /*
-        Default heapType is max-heap, use type = -1 for min-heap.
+        Default heapType is max-heap, use type = MIN_HEAP_TYPE for min-heap.
         If arr is passed, then heap will be built based on the values of arr.
     */
 
-    // Indices will be used as data if integer array is passed
-    Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {});
+    // Indices will be used as data if double array is passed
+    Heap(int type = MAX_HEAP_TYPE, vector<double> arr = {})
 
 
     /*********** Methods *************/

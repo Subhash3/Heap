@@ -4,12 +4,11 @@
 
 using namespace std;
 
+// All constant definitions
 #define MAX_HEAP_TYPE 1
 #define MIN_HEAP_TYPE -1
-#define LEFT_CHILD 1
-#define RIGHT_CHILD -1
-#define EQUAL 0
 
+// Heap Element
 template <typename X>
 struct HeapElement
 {
@@ -65,16 +64,34 @@ private:
     void swap(HeapElement<T> *a, HeapElement<T> *b);
 
 public:
+    /*********** Methods *************/
+    // Converts an array into heap
+    void heapify();
+
+    // Prints the heap, (Only val not data)
+    void display();
+
+    // Inserts a new element to the heap along with data
+    bool insert(double element, T data);
+
+    // Overloaded method of the above method. If no data is passed, its index will be used a data
+    bool insert(double element);
+
+    // Removes the top/prioritized element of the heap
+    bool remove();
+
+    // Returns the top/prioritized element of the heap. This doesn't affect the heap.
+    HeapElement<T> peak();
+
+    // Returns true if the heap is empty and false otherwise.
+    bool isEmpty();
+
+    // Returns the sorted arr of the heapElements.val. This doesn't affect the heap.
+    vector<double> heapSort(bool reverse = false);
+
+    // Utility functions.
     void heapifyUp(int index);
     void heapifyDown(int elementIndex);
-    void heapify();
-    void display();
-    bool insert(double element, T data);
-    bool insert(double element);
-    bool remove();
-    HeapElement<T> peak();
-    bool isEmpty();
-    vector<double> heapSort(bool reverse = false);
 };
 
 template <class T>
