@@ -42,6 +42,8 @@
 #### To Do:
 - [x] Max Heap
 - [x] Add template instead of just integer.
-- [x] Add comparator function to distinguish b/w max and min heaps
+- [x] Add comparator function to distinguish b/w max and min heaps.
+- [x] Male val as double instead of int.
+- [ ] Make val to accept int, float and double.
 
 ##### Feel free to contribute and open any issues.

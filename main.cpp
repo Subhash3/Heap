@@ -4,7 +4,7 @@ void printVector(vector<int> arr);
 
 int main()
 {
-    int choice, index, parentIndex, num;
+    int choice, num;
     pair<int, int> children;
     vector<int> sorted;
     // Heap<int> *heap = new Heap<int>(-1, {{1, 0}, {2, 1}, {3, 2}, {5, 4}, {6, 5}, {7, 6}, {8, 7}, {9, 8}, {10, 9}});
@@ -38,7 +38,7 @@ int main()
             break;
         case 4:
             heapElement = heap->peak();
-            printf("Max/min element: %d, data: %d\n", heapElement.val, heapElement.data);
+            printf("Max/min element: %.2f, data: %d\n", heapElement.val, heapElement.data);
             break;
         case 5:
             sorted = heap->heapSort();

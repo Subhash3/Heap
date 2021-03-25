@@ -13,7 +13,7 @@ using namespace std;
 template <typename X>
 struct HeapElement
 {
-    int val;
+    double val;
     X data;
 };
 
@@ -39,8 +39,8 @@ public:
         this->heapify();
     }
 
-    // Indices will be used as data if integer array is passed
-    Heap(int type = MAX_HEAP_TYPE, vector<int> arr = {})
+    // Indices will be used as data if double array is passed
+    Heap(int type = MAX_HEAP_TYPE, vector<double> arr = {})
     {
         int i;
 
@@ -57,7 +57,7 @@ public:
     }
 
 private:
-    bool comparator(int a, int b, bool strict = true);
+    bool comparator(double a, double b, bool strict = true);
     pair<int, int> getChildrenIndices(int parentIndex);
     int getParentIndex(int childIndex);
     int getPrioritizedChildIndex(int parentIndex);
@@ -68,16 +68,16 @@ public:
     void heapifyDown(int elementIndex);
     void heapify();
     void display();
-    bool insert(int element, T data);
-    bool insert(int element);
+    bool insert(double element, T data);
+    bool insert(double element);
     bool remove();
     HeapElement<T> peak();
     bool isEmpty();
-    vector<int> heapSort(bool ascending = false);
+    vector<int> heapSort(bool reverse = false);
 };
 
 template <class T>
-bool Heap<T>::comparator(int a, int b, bool strict)
+bool Heap<T>::comparator(double a, double b, bool strict)
 {
     if (this->type == MAX_HEAP_TYPE)
     {
@@ -124,7 +124,7 @@ template <class T>
 int Heap<T>::getPrioritizedChildIndex(int parentIndex)
 {
     pair<int, int> children;
-    int a, b;
+    double a, b;
 
     children = this->getChildrenIndices(parentIndex);
     if (children.first == -1 && children.second != -1)
@@ -160,7 +160,7 @@ void Heap<T>::display()
     for (i = 0; i < this->size; i++)
     {
         enteredLoop = true;
-        printf("%d  ", this->items[i].val);
+        printf("%f  ", this->items[i].val);
         fflush(NULL);
     }
     printf(enteredLoop ? "\b\b]\n" : "]\n");
@@ -171,7 +171,8 @@ void Heap<T>::display()
 template <class T>
 void Heap<T>::heapifyUp(int elementIndex)
 {
-    int parentIndex, element;
+    int parentIndex;
+	double element;
 
     element = this->items[elementIndex].val;
     while (true)
@@ -231,7 +232,7 @@ void Heap<T>::heapify()
 }
 
 template <class T>
-bool Heap<T>::insert(int element, T data)
+bool Heap<T>::insert(double element, T data)
 {
     int elementIndex;
     HeapElement<T> heapElement;
@@ -249,7 +250,7 @@ bool Heap<T>::insert(int element, T data)
 }
 
 template <class T>
-bool Heap<T>::insert(int element)
+bool Heap<T>::insert(double element)
 {
     // If no data is provided, index is used!
     return this->insert(element, this->size);
@@ -272,7 +273,7 @@ bool Heap<T>::remove()
 }
 
 template <class T>
-vector<int> Heap<T>::heapSort(bool ascending)
+vector<int> Heap<T>::heapSort(bool reverse)
 {
     vector<HeapElement<T>> heapCopy;
     vector<int> sorted;
@@ -289,7 +290,7 @@ vector<int> Heap<T>::heapSort(bool ascending)
     while (!this->isEmpty())
     {
         maxElement = this->peak();
-        if (ascending)
+        if (reverse)
         {
             sorted.insert(sorted.begin(), maxElement.val);
         }
